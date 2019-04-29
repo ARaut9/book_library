@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Your Library</h1>
+      <button id="add-book-btn">Add New Book</button>
+    </div>
+  </header>
+    
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author Name</th>
+        <th>Pages</th>
+        <th>Read?</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody></tbody>
+  </table>
+</div>
+
+<div class="hidden" id="form-container">
+  <div><button id="cancel-btn"></button></div>
+
+  <form id="add-book-form">
+    <input type="text" id="title" placeholder="Book Title">
+
+    <input type="text" id="author" placeholder="Author Name">
+
+    <input type="number" id="pages" placeholder="Number of Pages">
+
+    <div>
+      <label>Have Read?</label>
+      <input type="checkbox" id="read" name="read-status">
+    </div>
+
+    <input type="submit" value="Add Book">
+  </form>
+</div>
+
+  <script src="library.js"></script>
+</body>
+</html>
