@@ -13,11 +13,13 @@ let myLibrary = [
   },
 ];
 
-function Book(title, author, pages, readStatus) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
 }
 
 function addBookToLibrary(event) {
@@ -94,10 +96,8 @@ function render() {
 
     readStatus.addEventListener("click", () => {
       if (myLibrary[i].readStatus) {
-        console.log("hey");
         myLibrary[i].readStatus = false;
       } else {
-        console.log("ho");
         myLibrary[i].readStatus = true;
       }
     
