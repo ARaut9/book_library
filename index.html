@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Library</title>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <header>
@@ -13,43 +15,40 @@
       <button id="add-book-btn">Add New Book</button>
     </div>
   </header>
-    
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Title</th>
-        <th>Author Name</th>
-        <th>Pages</th>
-        <th>Read?</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
 
-    <tbody></tbody>
-  </table>
-</div>
+  <div class="form-container hidden">
+    <form id="add-book-form">
+      <div class="inputs">
+        <input type="text" name="title" placeholder="Book Title">
+        <input type="text" name="author" placeholder="Author Name">
+        <input type="number" name="pages" placeholder="Number of Pages">
+      </div>
 
-<div class="hidden" id="form-container">
-  <div><button id="cancel-btn"></button></div>
+      <div class="buttons">
+        <button type="submit">Add Book</button>
+        <button id="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
 
-  <form id="add-book-form">
-    <input type="text" id="title" placeholder="Book Title">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author Name</th>
+          <th>Pages</th>
+          <th>Read?</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
 
-    <input type="text" id="author" placeholder="Author Name">
-
-    <input type="number" id="pages" placeholder="Number of Pages">
-
-    <div>
-      <label>Have Read?</label>
-      <input type="checkbox" id="read" name="read-status">
-    </div>
-
-    <input type="submit" value="Add Book">
-  </form>
-</div>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <script src="library.js"></script>
 </body>
+
 </html>
