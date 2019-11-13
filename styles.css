@@ -12,8 +12,8 @@ header {
 }
 
 header h1 {
-  font-size: 1.5rem;
-  padding: 10px 20px;
+  font-size: 2rem;
+  padding: 10px 0;
 }
 
 header button {
@@ -29,8 +29,8 @@ header button {
 /* Table */
 
 .table-container {
-  max-width: 85%;
   margin: 50px auto;
+  width: 80%;
 }
 
 table {
@@ -38,9 +38,9 @@ table {
 }
 
 table, th, td {
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 2;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  text-align: left;
 }
 
 th, td {
@@ -61,7 +61,7 @@ th:nth-child(2), td:nth-child(2) {
 }
 
 th:nth-child(3), td:nth-child(3) {
-  flex: 3;
+  flex: 4;
 }
 
 th:nth-child(4), td:nth-child(4) {
@@ -69,11 +69,11 @@ th:nth-child(4), td:nth-child(4) {
 }
 
 th:nth-child(5), td:nth-child(5) {
-  flex: 1;
+  flex: 2;
 }
 
 th:last-child, td:last-child {
-  flex: 1;
+  flex: 2;
 }
 
 /* Form */
