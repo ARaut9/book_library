@@ -37,6 +37,17 @@ table {
   width: 100%;
 }
 
+tbody input {
+  display: none;
+}
+
+tbody button {
+  background-color: #fff;
+  border: 0;
+  font-size: 1.3rem;
+  padding: 0;
+}
+
 table, th, td {
   font-size: 1.3rem;
   line-height: 1.2;
@@ -80,9 +91,14 @@ th:last-child, td:last-child {
 
 .form-container {
   background-color: #fff;
+  display: none;
   margin: 0 auto;
   padding: 3%;
   width: 80%;
+}
+
+.form-container.show {
+  display: block;
 }
 
 .inputs {
@@ -113,12 +129,4 @@ form button {
   font-weight: bold;
   padding: 10px;
   width: 48%;
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: block;
 }

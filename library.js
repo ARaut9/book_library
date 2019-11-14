@@ -1,140 +1,80 @@
-let myLibrary = [
-  {
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    pages: 295,
-    readStatus: false,
-  },
-  {
-    title: "Harry Potter",
-    author: "J.K. Rowling",
-    pages: 150,
-    readStatus: false,
-  },
-];
+/* Select Elements from dom */
 
-class Book {
-  constructor(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-  }
+const addBookForm = document.querySelector('.add-book');
+const tableBody = document.querySelector('tbody');
+const addBookFormBtn = document.querySelector('.add-book-btn');
+const cancelBookFormBtn = document.querySelector('.cancel-btn');
+const formContainer = document.querySelector('.form-container');
+
+const books = JSON.parse(localStorage.getItem('books')) || [];
+
+/* Functions */
+
+function addBook(e) {
+  e.preventDefault();
+
+  const title = e.target.title.value;
+  const author = e.target.author.value;
+  const pages = e.target.pages.value;
+  const readStatus = false;
+
+  const book = { title, author, pages, readStatus };
+  books.push(book);
+
+  localStorage.setItem('books', JSON.stringify(books));
+  renderBooks();
+  formContainer.classList.remove('show');
+  this.reset();
 }
 
-function addBookToLibrary(event) {
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
-  const read = document.querySelector("#read");
-  let readStatus;
+function renderBooks() {
+  tableBody.innerHTML = books.map((book, i) => {
+    return `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${book.title}</td>
+        <td>${book.author}</td>
+        <td>${book.pages}</td>
+        <td>
+          <input type='checkbox' id=${i} data-index=${i} ${books.readStatus ? 'checked' : ''}>
+          <label for=${i}>
+            ${book.readStatus ? '<i class="fas fa-check-square"></i>' : '<i class="far fa-check-square"></i>'}
+          <label>
+        </td>
+        <td>
+          <button data-index=${i}>
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
 
-  if(read.checked) {
-    readStatus = true;
+function handleClick(e) {
+  if (e.target.matches('input')) {
+    const index = e.target.dataset.index;
+    // toggle read status
+    books[index].readStatus = !books[index].readStatus;
+  } else if (e.target.parentNode.matches('button')) {
+    const index = e.target.dataset.index;
+    // delete book
+    books.splice(index, 1);
   } else {
-    readStatus = false;
+    return;
   }
-
-  let book = new Book(title, author, pages, readStatus);
-
-  myLibrary.push(book);
-
-  render();
-
-  formContainer.classList.remove("show");
-  formContainer.classList.add("hidden");
-  
-  event.preventDefault();
+  localStorage.setItem('books', JSON.stringify(books));
+  renderBooks();
 }
 
-function render() {
-  const tableBody = document.querySelector("tbody");
+/* Event Listeners */
 
-  if (tableBody.children.length > 0) {
-    while (tableBody.children.length !== 0) {
-      tableBody.removeChild(tableBody.lastChild);
-    }
-  }
-
-  for (let i = 0; i < myLibrary.length; i++) {
-    const tableRow = document.createElement("tr");
-    const bookNo = document.createElement("td");
-    const title = document.createElement("td");
-    const author = document.createElement("td");
-    const pages = document.createElement("td");
-    const readStatus = document.createElement("td");
-    const deleteElement = document.createElement("td");
-    const deleteButton = document.createElement("button");
-
-    tableBody.appendChild(tableRow);
-    tableRow.setAttribute("data-index", `${i}`);
-    tableRow.appendChild(bookNo);
-    tableRow.appendChild(title);
-    tableRow.appendChild(author);
-    tableRow.appendChild(pages);
-    tableRow.appendChild(readStatus);
-    tableRow.appendChild(deleteElement);
-    deleteElement.appendChild(deleteButton);
-    deleteButton.style.width = '30px';
-    deleteButton.style.height = '30px';
-    deleteButton.style.border = '0';
-    deleteButton.style.background = '#fff url("icons/delete.png") no-repeat center center';
-    deleteButton.style.backgroundSize = '100%';
-
-    bookNo.innerHTML = `${i + 1}`;
-    title.innerHTML = `${myLibrary[i].title}`;
-    author.innerHTML = `${myLibrary[i].author}`;
-    pages.innerHTML = `${myLibrary[i].pages}`;
-
-    if (myLibrary[i].readStatus) {
-      readStatus.style.background = '#fff url("icons/toggle-on.png") no-repeat center center';
-    } else {
-      readStatus.style.background = '#fff url("icons/toggle-off.png") no-repeat center center';
-    }
-
-    readStatus.style.backgroundSize = '35px';
-
-    readStatus.addEventListener("click", () => {
-      if (myLibrary[i].readStatus) {
-        myLibrary[i].readStatus = false;
-      } else {
-        myLibrary[i].readStatus = true;
-      }
-    
-      render();
-    });
-    
-
-    deleteButton.addEventListener("click", (event) => {
-      let deleteRowIndex = event.target.parentElement.parentElement.getAttribute("data-index");
-      deleteBook(deleteRowIndex);
-    });
-  }
-}
-
-const addBookForm = document.querySelector("#add-book-form");
-addBookForm.addEventListener("submit", addBookToLibrary);
-
-const addBookBtn = document.querySelector("#add-book-btn");
-const formContainer = document.querySelector("#form-container");
-addBookBtn.addEventListener("click", () => {
-  if (formContainer.classList.value === "hidden") {
-    formContainer.classList.remove("hidden");
-    formContainer.classList.add("show");
-  }
+addBookForm.addEventListener('submit', addBook);
+tableBody.addEventListener('click', handleClick);
+addBookFormBtn.addEventListener('click', () => formContainer.classList.add('show'));
+cancelBookFormBtn.addEventListener('click', () => {
+  formContainer.classList.remove('show');
+  addBookForm.reset();
 });
 
-const cancelBookForm = document.querySelector("#cancel-btn");
-cancelBookForm.addEventListener("click", () => {
-  if (formContainer.classList.value === "show") {
-    formContainer.classList.remove("show");
-    formContainer.classList.add("hidden");
-  }
-});
-
-render();
-
-function deleteBook(index) {
-  myLibrary.splice(index, 1);
-  render();
-}
+renderBooks();

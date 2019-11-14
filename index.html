@@ -14,20 +14,20 @@
 
   <header>
     <h1>All Books</h1>
-    <button id="add-book-btn">Add New Book</button>
+    <button class="add-btn">Add New Book</button>
   </header>
 
-  <div class="form-container hidden">
-    <form id="add-book-form">
+  <div class="form-container">
+    <form class="add-book">
       <div class="inputs">
-        <input type="text" name="title" placeholder="Book Title">
-        <input type="text" name="author" placeholder="Author Name">
-        <input type="number" name="pages" placeholder="Number of Pages">
+        <input type="text" name="title" placeholder="Book Title" required>
+        <input type="text" name="author" placeholder="Author Name" required>
+        <input type="number" name="pages" placeholder="Number of Pages" required>
       </div>
 
       <div class="buttons">
         <button type="submit">Add Book</button>
-        <button id="cancel-btn">Cancel</button>
+        <button class="cancel-btn">Cancel</button>
       </div>
     </form>
   </div>
