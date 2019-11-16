@@ -29,7 +29,7 @@ header button, header select {
 /* Table */
 
 .table-container {
-  margin: 50px auto;
+  margin: 10px auto;
   width: 80%;
 }
 
@@ -46,6 +46,22 @@ tbody button {
   border: 0;
   font-size: 1.3rem;
   padding: 0;
+}
+
+/* Styles for font-awesome trash icon */
+
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.trash::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f2ed";
 }
 
 table, th, td {
@@ -132,6 +148,27 @@ form button {
   width: 48%;
 }
 
+/* Sort */
+
+.sort-controls {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group div {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.radio-group span {
+  font-size: 1.2rem;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 801px) {
@@ -149,7 +186,6 @@ form button {
   }
 
   .table-container {
-    margin: 30px auto;
     width: 90%;
   }
 
@@ -184,6 +220,19 @@ form button {
     font-weight: bold;
     padding: 8px;
   }
+
+  .sort-controls {
+    width: 90%;
+  }
+  
+  .radio-group div {
+    font-size: 0.7rem;
+    margin-top: 7px;
+  }
+  
+  .radio-group span {
+    font-size: 0.9rem;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -194,10 +243,6 @@ form button {
   header button, header select {
     font-size: 0.7rem;
     padding: 4px 8px;
-  }
-
-  .table-container {
-    margin: 20px auto;
   }
 
   tbody button {
@@ -221,5 +266,18 @@ form button {
     font-size: 0.7rem;
     font-weight: bold;
     padding: 6px;
+  }
+
+  .sort-controls {
+    width: 90%;
+  }
+  
+  .radio-group div {
+    font-size: 0.5rem;
+    margin-top: 3px;
+  }
+  
+  .radio-group span {
+    font-size: 0.7rem;
   }
 }

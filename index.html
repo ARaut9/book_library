@@ -37,6 +37,42 @@
     </form>
   </div>
 
+  <div class="sort-controls">
+    <fieldset class="radio-group">
+      <span>Sort By</span>
+
+      <div>
+        <span>Title</span>
+        <label>
+          <input type="radio" value="title-ascending" name="sort-by" checked>A -> Z
+        </label>
+        <label>
+          <input type="radio" value="title-decending" name="sort-by">Z -> A
+        </label>
+      </div>
+
+      <div>
+        <span>Author</span>
+        <label>
+          <input type="radio" value="author-ascending" name="sort-by">A -> Z
+        </label>
+        <label>
+          <input type="radio" value="author-decending" name="sort-by">Z -> A
+        </label>
+      </div>
+
+      <div>
+        <span>Pages</span>
+        <label>
+          <input type="radio" value="pages-high" name="sort-by">High -> Low
+        </label>
+        <label>
+          <input type="radio" value="pages-low" name="sort-by">Low -> High
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
   <div class="table-container">
     <table>
       <thead>

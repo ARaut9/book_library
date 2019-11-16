@@ -6,9 +6,13 @@ const addBookFormBtn = document.querySelector('.add-book-btn');
 const cancelBookFormBtn = document.querySelector('.cancel-btn');
 const formContainer = document.querySelector('.form-container');
 const bookFilter = document.querySelector('.book-filter');
+const sortInputs = document.querySelectorAll('input[name="sort-by"]');
+const radioGroup = document.querySelector('.radio-group');
 
 bookFilter.selectedIndex = 0;
+sortInputs[0].checked = true;
 let filterValue = 'all';
+let sortValue = sortInputs[0].value;
 const books = JSON.parse(localStorage.getItem('books')) || [];
 
 /* Functions */
@@ -44,8 +48,30 @@ function filterBooks(filterValue) {
   return books;
 }
 
+function sortBooks(books, sortValue) {
+  switch (sortValue) {
+    case 'title-ascending':
+      return books.sort((a, b) => a.title > b.title);
+
+    case 'title-decending':
+      return books.sort((a, b) => a.title < b.title);
+
+    case 'author-ascending':
+      return books.sort((a, b) => a.author > b.author);
+
+    case 'author-decending':
+      return books.sort((a, b) => a.author < b.author);
+
+    case 'pages-high':
+      return books.sort((a, b) => a.pages < b.pages);
+
+    case 'pages-low':
+      return books.sort((a, b) => a.pages > b.pages);
+  }
+}
+
 function renderBooks() {
-  const booksToRender = filterBooks(filterValue);
+  const booksToRender = sortBooks(filterBooks(filterValue), sortValue);
   tableBody.innerHTML = booksToRender.map((book, i) => {
     return `
       <tr>
@@ -60,9 +86,7 @@ function renderBooks() {
           <label>
         </td>
         <td>
-          <button data-id=${book.id}>
-            <i class="fas fa-trash-alt"></i>
-          </button>
+          <button class="icon trash" data-id=${book.id}></button>
         </td>
       </tr>
     `;
@@ -70,13 +94,13 @@ function renderBooks() {
 }
 
 function handleClick(e) {
-  const id = e.target.parentNode.dataset.id;
+  const id = e.target.dataset.id;
   const book = books.find(book => book.id === id);
 
   if (e.target.matches('input')) {
-    // toggle read statu
+    // toggle read status
     book.readStatus = !book.readStatus;
-  } else if (e.target.parentNode.matches('button')) {
+  } else if (e.target.matches('button')) {
     // delete book
     const index = books.indexOf(book);
     books.splice(index, 1);
@@ -100,6 +124,10 @@ bookFilter.addEventListener('change', () => {
   const index = bookFilter.selectedIndex;
   const options = bookFilter.options;
   filterValue = options[index].value;
+  renderBooks();
+});
+radioGroup.addEventListener('change', (e) => {
+  sortValue = e.target.value;
   renderBooks();
 });
 
