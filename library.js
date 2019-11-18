@@ -8,6 +8,7 @@ const formContainer = document.querySelector('.form-container');
 const bookFilter = document.querySelector('.book-filter');
 const sortInputs = document.querySelectorAll('input[name="sort-by"]');
 const radioGroup = document.querySelector('.radio-group');
+const sortLabel = document.querySelector('.sort-label');
 
 bookFilter.selectedIndex = 0;
 sortInputs[0].checked = true;
@@ -129,6 +130,10 @@ bookFilter.addEventListener('change', () => {
 radioGroup.addEventListener('change', (e) => {
   sortValue = e.target.value;
   renderBooks();
+});
+sortLabel.addEventListener('click', function () {
+  this.classList.toggle('close');
+  radioGroup.classList.toggle('show');
 });
 
 renderBooks();

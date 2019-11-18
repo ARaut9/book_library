@@ -155,7 +155,19 @@ form button {
   width: 80%;
 }
 
+.sort-label::after {
+  content: '▼';
+}
+
+.sort-label.close::after {
+  content: '▲';
+}
+
 .radio-group {
+  display: none;
+}
+
+.radio-group.show {
   display: flex;
   flex-direction: column;
 }
@@ -165,8 +177,9 @@ form button {
   margin-top: 10px;
 }
 
-.radio-group span {
+.sort-label {
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 /* Media Queries */
@@ -230,7 +243,7 @@ form button {
     margin-top: 7px;
   }
   
-  .radio-group span {
+  .sort-label {
     font-size: 0.9rem;
   }
 }
@@ -277,7 +290,7 @@ form button {
     margin-top: 3px;
   }
   
-  .radio-group span {
+  .sort-label {
     font-size: 0.7rem;
   }
 }
